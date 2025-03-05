@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchTopLosers } from "../../redux/stockSlice";
-import TableHeader from "../../components/core/TableHeader";
-import TableRow from "../../components/core/TableRow";
+import TableHeader from "../core/TableHeader";
+import TableRow from "../core/TableRow";
 
 const TopLosersTable = () => {
   const dispatch = useDispatch();
