@@ -1,38 +1,17 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const API_KEY = "824W86Y9TQLA608D";
-const BASE_URL = "https://www.alphavantage.co/query?function=TOP_GAINERS_LOSERS&apikey=824W86Y9TQLA608D";
-
-const fetchStockData = async () => {
-  try {
-    const response = await axios.get(BASE_URL, {
-      params: {
-        function: "TOP_GAINERS_LOSERS",
-        apikey: API_KEY,
-      },
-    });
-
-    return {
-      topGainers: response.data.top_gainers || [],
-      topLosers: response.data.top_losers || [],
-    };
-  } catch (error) {
-    throw error.response ? error.response.data : error.message;
-  }
-};
-
+const LOCAL_JSON_PATH = "/src/constants/gainers.json";
 
 export const fetchTopGainers = createAsyncThunk("stocks/fetchTopGainers", async () => {
-  const data = await fetchStockData();
-  return data.topGainers;
+  const response = await axios.get(LOCAL_JSON_PATH);
+  return response.data.top_gainers || [];
 });
 
 export const fetchTopLosers = createAsyncThunk("stocks/fetchTopLosers", async () => {
-  const data = await fetchStockData();
-  return data.topLosers;
+  const response = await axios.get(LOCAL_JSON_PATH);
+  return response.data.top_losers || [];
 });
-
 
 const stockSlice = createSlice({
   name: "stocks",
