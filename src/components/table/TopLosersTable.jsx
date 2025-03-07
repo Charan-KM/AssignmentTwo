@@ -1,12 +1,15 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchTopLosers } from "../../redux/stockSlice";
+import { fetchTopLosers } from "../../store/reducers/stockSlice";
+import { selectTopLosers, selectStocksStatus } from "../../store/selectors/stocks";
 import TableHeader from "../core/TableHeader";
 import TableRow from "../core/TableRow";
 
 const TopLosersTable = () => {
   const dispatch = useDispatch();
-  const { topLosers, status, error } = useSelector((state) => state.stocks);
+
+  const topLosers = useSelector(selectTopLosers);
+  const { status, error } = useSelector(selectStocksStatus);
 
   useEffect(() => {
     dispatch(fetchTopLosers());
