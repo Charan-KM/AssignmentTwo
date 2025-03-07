@@ -2,10 +2,9 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchTopGainers } from "../../store/reducers/stockSlice";
 import { selectTopGainers, selectStocksStatus } from "../../store/selectors/stocks";
-import TableHeader from "../core/TableHeader";
-import TableRow from "../core/TableRow";
+import TableComponent from "../core/TableComponent";
 
-const TopGainersTable = () => {
+const TopGainers = () => {
   const dispatch = useDispatch();
 
   const topGainers = useSelector(selectTopGainers);
@@ -21,18 +20,11 @@ const TopGainersTable = () => {
   if (status === "failed") return <div>Error: {error}</div>;
 
   return (
-    <div className="overflow-x-auto mt-6">
+    <div>
       <h2 className="text-xl font-bold mb-4 text-green-500">Top Gainers</h2>
-      <table className="w-full border-collapse">
-        <TableHeader headers={headers} />
-        <tbody>
-          {topGainers?.map((row, index) => (
-            <TableRow key={index} row={row} headers={headers} />
-          ))}
-        </tbody>
-      </table>
+      <TableComponent headers={headers} data={topGainers} />
     </div>
   );
 };
 
-export default TopGainersTable;
+export default TopGainers;

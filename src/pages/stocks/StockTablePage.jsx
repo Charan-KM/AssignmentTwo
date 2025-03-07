@@ -1,6 +1,6 @@
 import React from "react";
-import TopGainers from "../../components/stockTables/TopGainers"; // ✅ Updated Import
-import TopLosers from "../../components/stockTables/TopLosers"; // ✅ Updated Import
+import TopGainers from "../../components/stockTables/TopGainers";
+import TopLosers from "../../components/stockTables/TopLosers";
 
 const StockTablesPage = () => {
   return (
